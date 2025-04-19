@@ -1,0 +1,104 @@
+### [CREATE] Building A
+POST http://localhost:3000/locations
+Content-Type: application/json
+
+{
+  "name": "Building A",
+  "locationNumber": "A",
+  "building": "A",
+  "area": 2000
+}
+
+### [CREATE] Level 1 - A
+POST http://localhost:3000/locations
+Content-Type: application/json
+
+{
+  "name": "Level 1 - A",
+  "locationNumber": "A-01",
+  "building": "A",
+  "area": 500,
+  "parentId": 1
+}
+
+### [CREATE] Room A-01-101
+POST http://localhost:3000/locations
+Content-Type: application/json
+
+{
+  "name": "Room A-01-101",
+  "locationNumber": "A-01-101",
+  "building": "A",
+  "area": 120,
+  "parentId": 2
+}
+
+### [CREATE] Building B
+POST http://localhost:3000/locations
+Content-Type: application/json
+
+{
+  "name": "Building B",
+  "locationNumber": "B",
+  "building": "B",
+  "area": 1800
+}
+
+### [CREATE] Level 5 - B
+POST http://localhost:3000/locations
+Content-Type: application/json
+
+{
+  "name": "Level 5 - B",
+  "locationNumber": "B-05",
+  "building": "B",
+  "area": 450,
+  "parentId": 4
+}
+
+### [CREATE] Pantry B-05
+POST http://localhost:3000/locations
+Content-Type: application/json
+
+{
+  "name": "Pantry B-05",
+  "locationNumber": "B-05-Pantry",
+  "building": "B",
+  "area": 80,
+  "parentId": 5
+}
+
+### [CREATE] Building C
+POST http://localhost:3000/locations
+Content-Type: application/json
+
+{
+  "name": "Building C",
+  "locationNumber": "C",
+  "building": "C",
+  "area": 1500
+}
+
+### [CREATE] Utility Room - C
+POST http://localhost:3000/locations
+Content-Type: application/json
+
+{
+  "name": "Utility Room C",
+  "locationNumber": "C-Utility",
+  "building": "C",
+  "area": 90,
+  "parentId": 7
+}
+
+### [GET] All locations (flat list)
+GET http://localhost:3000/locations
+
+### [GET] Tree structure
+GET http://localhost:3000/locations/tree
+
+### [GET] Single location
+GET http://localhost:3000/locations/1
+
+### [DELETE] Delete Room A-01-101
+DELETE http://localhost:3000/locations/3
