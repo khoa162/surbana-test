@@ -15,10 +15,10 @@ export class Location {
   id: number;
 
   @Column()
-  name: string; // e.g. "Meeting Room 1"
+  name: string;
 
   @Column({ unique: true })
-  locationNumber: string; // e.g. "A-01-01-M1"
+  locationNumber: string;
 
   @Column()
   building: string;
