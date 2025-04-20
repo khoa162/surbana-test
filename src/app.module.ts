@@ -7,13 +7,13 @@ import { Location } from './location/location.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'admin',
-      password: 'admin',
-      database: 'location',
+      host: process.env.DB_HOST ?? 'localhost',
+      port: +(process.env.DB_PORT ?? 5432),
+      username: process.env.DB_USERNAME ?? 'admin',
+      password: process.env.DB_PASSWORD ?? 'admin',
+      database: process.env.DB_NAME ?? 'location',
       entities: [Location],
-      synchronize: true,
+      synchronize: true, // auto-migration
     }),
     LocationModule,
   ],

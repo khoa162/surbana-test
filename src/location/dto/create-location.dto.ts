@@ -25,5 +25,5 @@ export class CreateLocationDto {
   @ApiProperty()
   @IsOptional()
   @IsNumber()
-  parentId?: number;
+  parentId?: number | null;
 }

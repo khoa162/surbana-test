@@ -27,7 +27,7 @@ export class Location {
   area: number;
 
   @TreeParent()
-  parent?: Location;
+  parent?: Location | null;
 
   @TreeChildren()
   children: Location[];

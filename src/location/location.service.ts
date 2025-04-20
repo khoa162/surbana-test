@@ -103,4 +103,45 @@ export class LocationService {
       throw new InternalServerErrorException('Failed to delete location');
     }
   }
+
+  async update(id: number, dto: CreateLocationDto): Promise<Location> {
+    const location = await this.locationRepo.findOne({
+      where: { id },
+      relations: ['parent'],
+    });
+  
+    if (!location) {
+      this.logger.warn(`Location to update with ID ${id} not found`);
+      throw new NotFoundException(`Location with ID ${id} not found`);
+    }
+  
+    location.name = dto.name;
+    location.locationNumber = dto.locationNumber;
+    location.building = dto.building;
+    location.area = dto.area;
+  
+    if (dto.parentId) {
+      const parent = await this.locationRepo.findOneBy({ id: dto.parentId });
+      if (!parent) {
+        this.logger.warn(`Parent ID ${dto.parentId} not found`);
+        throw new NotFoundException(`Parent location with ID ${dto.parentId} not found`);
+      }
+      location.parent = parent;
+    } else {
+      location.parent = null;
+    }
+  
+    try {
+      const updated = await this.locationRepo.save(location);
+      this.logger.log(`Updated location: ${updated.locationNumber} (ID: ${updated.id})`);
+      return updated;
+    } catch (err) {
+      if (err.code === '23505') {
+        this.logger.warn(`Duplicate location number: ${dto.locationNumber}`);
+        throw new ConflictException('Location number must be unique');
+      }
+      this.logger.error(`Failed to update location ID: ${id}`, err.stack);
+      throw new InternalServerErrorException('Failed to update location');
+    }
+  }
 }

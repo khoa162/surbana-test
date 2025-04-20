@@ -1,5 +1,5 @@
 // src/location/location.controller.ts
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { LocationService } from './location.service';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { Location } from './location.entity';
@@ -40,6 +40,17 @@ export class LocationController {
   @ApiOperation({ summary: 'Delete a location by ID' })
   @ApiParam({ name: 'id', type: Number })
   remove(@Param('id') id: string): Promise<void> {
-    return this.locationService.remove(+id);
+    return this.locationService.remove(+id); // convert into number
   }
+
+  @Put(':id')
+  @ApiOperation({ summary: 'Update a location by ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiBody({ type: CreateLocationDto })
+  update(
+    @Param('id') id: string,
+    @Body() dto: CreateLocationDto,
+  ): Promise<Location> {
+    return this.locationService.update(+id, dto);
+}
 }

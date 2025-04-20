@@ -102,3 +102,40 @@ GET http://localhost:3000/locations/1
 
 ### [DELETE] Delete Room A-01-101
 DELETE http://localhost:3000/locations/3
+
+
+### [UPDATE] Room A-01-101
+PUT http://localhost:3000/locations/3
+Content-Type: application/json
+
+{
+  "name": "Room A-01-101 (Renovated)",
+  "locationNumber": "A-01-101-R",
+  "building": "A",
+  "area": 125,
+  "parentId": 2
+}
+
+### [UPDATE] Pantry B-05
+PUT http://localhost:3000/locations/6
+Content-Type: application/json
+
+{
+  "name": "Pantry B-05 Updated",
+  "locationNumber": "B-05-Pantry-NEW",
+  "building": "B",
+  "area": 85,
+  "parentId": 4
+}
+
+### [UPDATE] Utility Room - C (detach from parent)
+PUT http://localhost:3000/locations/8
+Content-Type: application/json
+
+{
+  "name": "Utility Room C (Detached)",
+  "locationNumber": "C-Utility-Root",
+  "building": "C",
+  "area": 90,
+  "parentId": null
+}
