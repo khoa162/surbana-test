@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { LocationController } from './location.controller';
 import { LocationService } from './location.service';
 import { CreateLocationDto } from './dto/create-location.dto';
-// import { UpdateLocationDto } from './dto/update-location.dto';
 
 describe('LocationController', () => {
   let controller: LocationController;
